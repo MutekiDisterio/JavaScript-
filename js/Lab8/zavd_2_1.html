@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Завдання 2.1</title>
+  <style>
+    body { font-family: Arial; font-size: 18pt; background-color: #f0f0f0; }
+    .row { margin: 20px 0; }
+    #clickRow { font-size: 18pt; color: black; background-color: transparent; cursor: pointer; }
+    #mouseRow { background-color: transparent; padding: 5px; }
+    #hoverRow { background-color: transparent; padding: 5px; }
+  </style>
+</head>
+<body>
+  <div class="row"><strong>П'ять подій з мишкою</strong></div>
+  <div class="row" id="clickRow">Клацніть на мене мишкою</div>
+  <div class="row" id="mouseRow">На цьому тексті натисніть, потримайте і відпустіть ліву кнопку мишки</div>
+  <div class="row" id="hoverRow">Повільно проведіть курсором мишки по цій написи</div>
+
+  <script>
+    let clicked = false;
+    document.getElementById("clickRow").onclick = function() {
+      if (!clicked) {
+        this.style.fontSize = "48pt";
+        this.style.color = "white";
+        this.style.backgroundColor = "skyblue";
+      } else {
+        this.style.fontSize = "18pt";
+        this.style.color = "black";
+        this.style.backgroundColor = "transparent";
+      }
+      clicked = !clicked;
+    };
+
+    const mouseRow = document.getElementById("mouseRow");
+    mouseRow.onmousedown = function() { this.style.backgroundColor = "green"; };
+    mouseRow.onmouseup = function() { this.style.backgroundColor = "yellow"; };
+
+    const hoverRow = document.getElementById("hoverRow");
+    hoverRow.onmouseover = function() { this.style.backgroundColor = "red"; };
+    hoverRow.onmouseout = function() { this.style.backgroundColor = "skyblue"; };
+  </script>
+</body>
+</html>

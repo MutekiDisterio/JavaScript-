@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Облік товарів</title>
+</head>
+<body>
+  <h2>Облік товарів</h2>
+  <table border="1" id="tab1">
+    <tr><th>Товар</th><th>Кількість</th><th>Ціна</th><th>Сума</th></tr>
+    <tr><td>Хліб</td><td>10</td><td>15</td><td>150</td></tr>
+    <tr><td>Молоко</td><td>5</td><td>22</td><td>110</td></tr>
+    <tr><td>Яйця</td><td>30</td><td>3</td><td>90</td></tr>
+  </table>
+  <br>
+  Рядок: <input type="text" id="row"><br>
+  Кількість: <input type="text" id="qty"><br>
+  Ціна: <input type="text" id="price"><br>
+  <button onclick="update()">Оновити</button>
+  <h3 id="total"></h3>
+
+  <script>
+    function update() {
+      let r = parseInt(document.getElementById("row").value);
+      let q = parseFloat(document.getElementById("qty").value);
+      let p = parseFloat(document.getElementById("price").value);
+      let table = document.getElementById("tab1");
+      table.rows[r].cells[1].innerHTML = q;
+      table.rows[r].cells[2].innerHTML = p;
+      table.rows[r].cells[3].innerHTML = (q * p).toFixed(2);
+      calcTotal();
+    }
+
+    function calcTotal() {
+      let table = document.getElementById("tab1");
+      let sum = 0;
+      for (let i = 1; i < table.rows.length; i++) {
+        sum += parseFloat(table.rows[i].cells[3].innerHTML);
+      }
+      document.getElementById("total").innerText = "Загальна вартість: " + sum.toFixed(2);
+    }
+
+    calcTotal();
+  </script>
+</body>
+</html>

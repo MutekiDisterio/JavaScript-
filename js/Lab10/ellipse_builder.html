@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Еліпс трьома способами</title>
+  <style>
+    #divMethod { position: relative; height: 300px; margin-bottom: 30px; }
+    .dot { width: 2px; height: 2px; background: black; position: absolute; }
+    svg { border: 1px solid black; }
+    canvas { border: 1px solid black; }
+  </style>
+</head>
+<body>
+  <h2>Побудова еліпса</h2>
+  Введіть a: <input type="text" id="a" value="100">
+  Введіть b: <input type="text" id="b" value="60">
+  <button onclick="drawAll()">Побудувати</button>
+
+  <h3>Мозаїка (DIV)</h3>
+  <div id="divMethod"></div>
+
+  <h3>SVG</h3>
+  <svg id="svgMethod" width="400" height="300">
+    <ellipse id="svgEllipse" cx="200" cy="150" rx="0" ry="0" fill="none" stroke="blue" stroke-width="2"/>
+  </svg>
+
+  <h3>Canvas</h3>
+  <canvas id="canvasMethod" width="400" height="300"></canvas>
+
+  <script>
+    function drawAll() {
+      let a = parseFloat(document.getElementById("a").value);
+      let b = parseFloat(document.getElementById("b").value);
+      drawDivEllipse(a, b);
+      drawSVGEllipse(a, b);
+      drawCanvasEllipse(a, b);
+    }
+
+    function drawDivEllipse(a, b) {
+      let container = document.getElementById("divMethod");
+      container.innerHTML = "";
+      for (let t = 0; t <= 2 * Math.PI; t += 0.05) {
+        let x = a * Math.cos(t);
+        let y = b * Math.sin(t);
+        let dot = document.createElement("div");
+        dot.className = "dot";
+        dot.style.left = (200 + x) + "px";
+        dot.style.top = (150 - y) + "px";
+        container.appendChild(dot);
+      }
+    }
+
+    function drawSVGEllipse(a, b) {
+      let el = document.getElementById("svgEllipse");
+      el.setAttribute("rx", a);
+      el.setAttribute("ry", b);
+    }
+
+    function drawCanvasEllipse(a, b) {
+      let ctx = document.getElementById("canvasMethod").getContext("2d");
+      ctx.clearRect(0, 0, 400, 300);
+      ctx.beginPath();
+      ctx.ellipse(200, 150, a, b, 0, 0, 2 * Math.PI);
+      ctx.stroke();
+    }
+  </script>
+</body>
+</html>

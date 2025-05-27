@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Видалення символу</title>
+</head>
+<body>
+  <p id="sentence">Це приклад речення.</p>
+  <button onclick="removeLastChar()">Видалити останній символ</button>
+
+  <script>
+    function removeLastChar() {
+      let sentence = document.getElementById("sentence");
+      sentence.textContent = sentence.textContent.slice(0, -1);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Завдання 2.2</title>
+  <style>
+    #container { text-align: center; }
+    #caption { font-size: 20pt; margin-top: 10px; cursor: pointer; }
+    img { width: 300px; height: auto; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="container" onclick="handleClick(event)">
+    <img id="img" src="https://via.placeholder.com/300x200.png?text=Image+1">
+    <div id="caption">Підпис 1</div>
+  </div>
+
+  <script>
+    let toggle = false;
+    function handleClick(e) {
+      const el = e.target;
+      if (el.id === "caption") {
+        el.style.color = el.style.color === "blue" ? "black" : "blue";
+      }
+      if (el.id === "img") {
+        document.getElementById("img").src = toggle ? 
+          "https://via.placeholder.com/300x200.png?text=Image+1" :
+          "https://via.placeholder.com/300x200.png?text=Image+2";
+        document.getElementById("caption").innerText = toggle ? "Підпис 1" : "Підпис 2";
+        toggle = !toggle;
+      }
+    }
+  </script>
+</body>
+</html>

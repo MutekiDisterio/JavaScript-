@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Введення даних</title>
+</head>
+<body>
+  <h2>Значення тригонометричної функції</h2>
+  <form name="form1">
+    Початковий кут (град): <input type="text" name="start" onchange="isNumb(this)"><br>
+    Кінцевий кут (град): <input type="text" name="end" onchange="isNumb(this)"><br>
+    Крок (град): <input type="text" name="step" onchange="isNumb(this)"><br>
+    Функція:
+    <select name="func">
+      <option value="sin">sin</option>
+      <option value="cos">cos</option>
+      <option value="tan">tg</option>
+    </select><br><br>
+    <input type="button" value="Обчислити" onclick="generate()">
+  </form>
+
+  <script>
+    function isNumb(fld) {
+      let t = fld.value;
+      for (let i = 0; i < t.length; i++) {
+        let ch = t.charAt(i);
+        if ((ch < "0" || ch > "9") && !(ch === "," || ch === ".")) {
+          alert("Не цифра");
+          fld.focus();
+          fld.select();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function generate() {
+      let s = document.form1.start.value;
+      let e = document.form1.end.value;
+      let st = document.form1.step.value;
+      let f = document.form1.func.value;
+      if (isNumb(document.form1.start) && isNumb(document.form1.end) && isNumb(document.form1.step)) {
+        let w = window.open("", "", "width=600,height=400");
+        let html = "<html><head><title>Результат</title></head><body><table border='1'><tr><th>Кут (град)</th><th>Кут (рад)</th><th>" + f + "</th></tr>";
+        for (let i = parseFloat(s); i <= parseFloat(e); i += parseFloat(st)) {
+          let rad = i * Math.PI / 180;
+          let val = Math[f](rad);
+          html += "<tr><td>" + i + "</td><td>" + rad.toFixed(4) + "</td><td>" + val.toFixed(4) + "</td></tr>";
+        }
+        html += "</table></body></html>";
+        w.document.write(html);
+      }
+    }
+  </script>
+</body>
+</html>

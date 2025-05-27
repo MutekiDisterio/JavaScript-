@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна 14 - Валідація форм JS</title>
+</head>
+<body>
+    <h1>Лабораторна робота 14 - Валідація форм засобами JavaScript</h1>
+    <script>
+        function upperCase(str) {
+            if (/^[A-Z]/.test(str)) {
+                console.log("String's starts with uppercase character");
+            } else {
+                console.log("String's not starts with uppercase character");
+            }
+        }
+
+        function checkEmailSimple(email) {
+            console.log(/^[\w.-]+@[\w.-]+\.\w+$/.test(email));
+        }
+
+        function findDbBd(str) {
+            console.log(str.match(/d(b+)(d)/ig));
+        }
+
+        function swapWords(str) {
+            console.log(str.replace(/(\w+)\s(\w+)/, "$2, $1"));
+        }
+
+        function validateCardNumber(num) {
+            console.log(/^\d{4}-\d{4}-\d{4}-\d{4}$/.test(num));
+        }
+
+        function checkEmailAdvanced(email) {
+            const re = /^[A-Za-z0-9]+[\w-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+            const invalid = /^[-_]/.test(email) || /--/.test(email);
+            if (re.test(email) && !invalid) {
+                console.log("Email is correct!");
+            } else {
+                console.log("Email is not correct!");
+            }
+        }
+
+        function checkLogin(login) {
+            const loginValid = /^[A-Za-z][A-Za-z0-9\.]{1,9}$/.test(login);
+            const numbers = login.match(/\d*\.?\d+/g);
+            console.log(loginValid);
+            console.log(numbers ? numbers.join(", ") : "");
+        }
+
+        upperCase('regexp');
+        upperCase('RegExp');
+
+        checkEmailSimple("Qmail2@gmail.com");
+
+        findDbBd("cdbBdbsbz");
+
+        swapWords("Java Script");
+
+        validateCardNumber("9999-9999-9999-9999");
+
+        checkEmailAdvanced('my_mail@gmail.com');
+        checkEmailAdvanced('#my_mail@gmail.com');
+        checkEmailAdvanced('my_ma--il@gmail.com');
+
+        checkLogin('ee1.1ret3');
+        checkLogin('ee1*1ret3');
+    </script>
+</body>
+</html>

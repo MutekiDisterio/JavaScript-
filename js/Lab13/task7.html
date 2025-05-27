@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Country & City</title></head>
+<body>
+  <select name="country" id="country">
+    <option value="ger">Germany</option>
+    <option value="usa">USA</option>
+    <option value="ukr">Ukraine</option>
+  </select>
+
+  <select name="cities" id="cities"></select>
+  <p id="output"></p>
+
+  <script>
+    let countrySelect = document.getElementById("country");
+    let citySelect = document.getElementById("cities");
+    let output = document.getElementById("output");
+
+    const cities = {
+      ger: ["Berlin", "Munich", "Frankfurt"],
+      usa: ["New York", "Los Angeles", "Chicago"],
+      ukr: ["Kyiv", "Lviv", "Odessa"]
+    };
+
+    function updateCities() {
+      let country = countrySelect.value;
+      citySelect.innerHTML = "";
+      cities[country].forEach(city => {
+        let opt = document.createElement("option");
+        opt.value = city;
+        opt.text = city;
+        citySelect.add(opt);
+      });
+      updateOutput();
+    }
+
+    function updateOutput() {
+      let country = countrySelect.options[countrySelect.selectedIndex].text;
+      let city = citySelect.options[citySelect.selectedIndex]?.text || "";
+      output.innerText = "Country: " + country + ", City: " + city;
+    }
+
+    countrySelect.addEventListener("change", updateCities);
+    citySelect.addEventListener("change", updateOutput);
+    updateCities();
+  </script>
+</body>
+</html>

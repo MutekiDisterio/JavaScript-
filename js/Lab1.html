@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Практична робота_01-DZ</title>
+</head>
+<body>
+    <h1 id="main-heading">Я ВІТАЮ ТЕБЕ СВІТ!!!</h1>
+    <button onclick="deleteHeading()">Видалити заголовок</button>
+    <button onclick="restoreHeading()">Відновити заголовок</button>
+
+    <script>
+        let savedHeading = null;
+
+        function deleteHeading() {
+            const h1 = document.getElementById("main-heading");
+            if (h1) {
+                savedHeading = h1.cloneNode(true);
+                h1.remove(); 
+            }
+        }
+
+        function restoreHeading() {
+            if (!document.getElementById("main-heading") && savedHeading) {
+                document.body.insertBefore(savedHeading, document.body.firstChild);
+                savedHeading = null; 
+            }
+        }
+    </script>
+</body>
+</html>

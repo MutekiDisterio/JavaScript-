@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Рух по колу</title>
+  <style>
+    #square {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="square"></div>
+  <script>
+    let square = document.getElementById("square");
+    let t = 0;
+    let R = 100;
+    let centerX = 200;
+    let centerY = 200;
+    setInterval(function () {
+      let x = centerX + R * Math.cos(t);
+      let y = centerY + R * Math.sin(t);
+      square.style.left = x + "px";
+      square.style.top = y + "px";
+      t += 0.05;
+    }, 50);
+  </script>
+</body>
+</html>

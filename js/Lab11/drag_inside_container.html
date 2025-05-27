@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Перетягування</title>
+  <style>
+    #container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      background-color: lightgray;
+    }
+    #square {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      left: 10px;
+      top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="square"></div>
+  </div>
+  <script>
+    let square = document.getElementById("square");
+    let container = document.getElementById("container");
+    let isDragging = false;
+
+    square.onmousedown = function () {
+      isDragging = true;
+    };
+    document.onmouseup = function () {
+      isDragging = false;
+    };
+    container.onmousemove = function (e) {
+      if (isDragging) {
+        let rect = container.getBoundingClientRect();
+        let x = e.clientX - rect.left - 25;
+        let y = e.clientY - rect.top - 25;
+        x = Math.max(0, Math.min(450, x));
+        y = Math.max(0, Math.min(450, y));
+        square.style.left = x + "px";
+        square.style.top = y + "px";
+      }
+    };
+  </script>
+</body>
+</html>

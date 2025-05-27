@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Mouse Events</title></head>
+<body>
+  <button id="btn">Interact</button>
+  <script>
+    let btn = document.getElementById("btn");
+    btn.addEventListener("click", () => alert("I was pressed!"));
+    btn.addEventListener("mouseover", () => alert("Mouse on me!"));
+    btn.addEventListener("mouseout", () => alert("Mouse is not on me!"));
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Resize Info</title></head>
+<body>
+  <div id="output"></div>
+  <script>
+    function showSize() {
+      document.getElementById("output").innerText =
+        "Width: " + window.innerWidth + " Height: " + window.innerHeight;
+    }
+    window.onresize = showSize;
+    showSize();
+  </script>
+</body>
+</html>

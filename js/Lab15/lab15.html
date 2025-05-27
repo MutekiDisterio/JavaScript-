@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Практична 15 - jQuery та JS</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <a href="https://example.com">Example HTTPS</a>
+    <a href="http://example.com">Example HTTP</a>
+
+    <h2 class="head">header1</h2>
+    <h2 class="head">header2 <span class="inner">inner elem1</span></h2>
+    <h2>header3</h2>
+    <h2 class="head">header4<span>inner elem2</span></h2>
+    <h2>header5</h2>
+
+    <h3>header1</h3>
+    <div>text1</div>
+    <h3>header2</h3>
+    <div>text2</div>
+
+    <form id="checkboxForm">
+        <input type="checkbox" class="check">
+        <input type="checkbox" class="check">
+        <input type="checkbox" class="check">
+        <input type="checkbox" class="check">
+        <input type="checkbox" class="check">
+        <input type="checkbox" class="check">
+    </form>
+
+    <script>
+        $("a[href^='https://']").attr("target", "_blank");
+
+        $("h2.head").css("background", "green").find(".inner").css("font-size", "35px");
+
+        $("h3 + div").each(function() {
+            $(this).insertBefore($(this).prev("h3"));
+        });
+
+        let checkedCount = 0;
+        $(".check").on("change", function() {
+            if (this.checked) checkedCount++;
+            if (checkedCount === 3) {
+                $(".check").attr("disabled", true);
+            }
+        });
+
+        let arr = ["Tom", "Sam", "Ray", "Bob"];
+        let [x, y, , ...z] = arr;
+        console.log(x);
+        console.log(y);
+        console.log(z);
+
+        let data = {
+            names: ["Sam", "Tom", "Ray", "Bob"],
+            ages: [20, 24, 22, 26],
+        };
+        let { names: [, name2, , name4], ages: [, age2, , age4] } = data;
+        console.log(name2);
+        console.log(age2);
+        console.log(name4);
+        console.log(age4);
+
+        function mul(...args) {
+            let result = args.filter(e => typeof e === 'number').reduce((acc, val) => acc * val, 1);
+            return result === 1 ? 0 : result;
+        }
+        console.log(mul(1, "str", 2, 3, true));
+        console.log(mul(null, "str", false, true));
+
+        let server = {
+            data: 0,
+            convertToString(callback) {
+                callback(() => this.data + "");
+            }
+        };
+
+        let client = {
+            server,
+            result: "",
+            calc(data) {
+                this.server.data = data;
+                this.server.convertToString(this.notification());
+            },
+            notification() {
+                return callback => {
+                    this.result = callback();
+                };
+            }
+        };
+
+        client.calc(123);
+        console.log(client.result);
+        console.log(typeof client.result);
+
+        function mapBuilder(keysArray, valuesArray) {
+            let map = new Map();
+            for (let i = 0; i < keysArray.length; i++) {
+                map.set(keysArray[i], valuesArray[i]);
+            }
+            return map;
+        }
+
+        let keys = [1, 2, 3, 4];
+        let values = ["div", "span", "b", "i"];
+        let map = mapBuilder(keys, values);
+        console.log(map.size);
+        console.log(map.get(2));
+    </script>
+</body>
+</html>

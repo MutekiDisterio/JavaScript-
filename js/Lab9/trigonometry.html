@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Тригонометрія</title>
+</head>
+<body>
+  <h2>Обчислення тригонометричних функцій</h2>
+  <form>
+    Аргумент (градуси):
+    <input type="text" id="arg" onchange="checkArg(this)">
+    <br><br>
+    Функція:
+    <select id="func">
+      <option value="sin">sin</option>
+      <option value="cos">cos</option>
+      <option value="tan">tan</option>
+    </select>
+    <br><br>
+    <button type="button" onclick="calculate()">Обчислити</button>
+  </form>
+  <p id="result"></p>
+
+  <script>
+    function checkArg(fld) {
+      let x = fld.value;
+      if (isNaN(x) || x.trim() === "") {
+        alert("Введіть коректне число");
+        fld.focus();
+        fld.select();
+      }
+    }
+
+    function calculate() {
+      let arg = parseFloat(document.getElementById("arg").value);
+      if (isNaN(arg)) {
+        alert("Невірний аргумент");
+        return;
+      }
+      let func = document.getElementById("func").value;
+      let radians = arg * Math.PI / 180;
+      let result = eval("Math." + func + "(" + radians + ")");
+      document.getElementById("result").innerText = "Результат: " + result;
+    }
+  </script>
+</body>
+</html>
